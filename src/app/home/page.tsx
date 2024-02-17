@@ -9,14 +9,14 @@ const page = () => {
 
   useEffect(() => {
     async function initPosts(): Promise<any> {
-      setPosts(await fetchData("https://api.escuelajs.co/api/v1/products"));
+      setPosts(await fetchData("https://fakestoreapi.com/products"));
     }
     initPosts();
   }, []);
   console.log(posts);
 
   return (
-    <div>
+    <div className="grid sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-x-4">
       {posts.map((post) => (
         <Cards post={post} />
       ))}
