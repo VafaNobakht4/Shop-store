@@ -2,6 +2,7 @@
 import { fetchData } from "@/api/useApi";
 import { products } from "@/types/product";
 import React, { useEffect, useState } from "react";
+import Cards from "./components/Cards";
 
 const page = () => {
   const [posts, setPosts] = useState<products[]>([]);
@@ -14,7 +15,13 @@ const page = () => {
   }, []);
   console.log(posts);
 
-  return <div></div>;
+  return (
+    <div>
+      {posts.map((post) => (
+        <Cards post={post} />
+      ))}
+    </div>
+  );
 };
 
 export default page;
