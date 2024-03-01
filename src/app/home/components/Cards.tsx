@@ -14,18 +14,21 @@ type Props = {
 const Cards: FC<Props> = ({ post }) => {
   return (
     <div>
-      <Card className="w-96 h-96 shadow-lg mt-4" title="vafa">
+      <Card className="w-96 h-[445px] shadow-lg mt-4" title="vafa">
         <CardMedia
-          className="object-cover h-36"
+          className="object-cover h-80"
           image={post.image}
           title="green iguana"
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            {post.title}
+            {`${post.title.substring(0, 25)}...`}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {post.description}
+            <div className="gap-x-3">
+              <span className="font-semibold text-lg">Price:</span>
+              <span className="text-base opacity-50"> {`${post.price}$`}</span>
+            </div>
           </Typography>
         </CardContent>
         <CardActions></CardActions>
