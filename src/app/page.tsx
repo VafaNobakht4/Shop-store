@@ -1,3 +1,9 @@
-export default function Home() {
-  return <div>Hello world</div>;
+import Home from "./home/components/Home";
+
+export default function page() {
+  return (
+    <div>
+      <Home />
+    </div>
+  );
 }
