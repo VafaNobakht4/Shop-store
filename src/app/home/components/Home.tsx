@@ -3,7 +3,7 @@ import { fetchData } from "@/api/useApi";
 import { Products } from "@/types/product";
 import React, { useEffect, useState } from "react";
 import Cards from "./Cards";
-import Search from "./Search";
+import SearchBox from "./Search";
 import { PRODUCTS_API } from "@/api/routes";
 
 const Home = () => {
@@ -19,8 +19,7 @@ const Home = () => {
 
   return (
     <>
-      <Search setSearch={setSearch} />
-      {/* {posts.length ? ( */}
+      <SearchBox setSearch={setSearch} />
       <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-10 gap-x-20">
         {posts.map((post) => {
           if (post.title.includes(search))
@@ -31,11 +30,6 @@ const Home = () => {
             );
         })}
       </div>
-      {/* ) : (
-        <div className="m-auto justify-center flex flex-row items-center">
-          <Loading />
-        </div>
-      )} */}
     </>
   );
 };
