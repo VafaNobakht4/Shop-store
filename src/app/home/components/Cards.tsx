@@ -21,9 +21,9 @@ const Cards: FC<Props> = ({ post }) => {
 
   return (
     <Card
-      className={`mt-4 transition-transform duration-300 transform ${
-        hovered ? "scale-105 shadow-xl" : "shadow-lg"
-      } hover:cursor-pointer`}
+      className={`mt-4 transition-all duration-500 transform ${
+        hovered ? "scale-105 shadow-2xl" : "shadow-lg"
+      } hover:cursor-pointer hover:scale-105 hover:shadow-2xl`}
       title={post.title}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -40,7 +40,7 @@ const Cards: FC<Props> = ({ post }) => {
             gutterBottom
             variant="h5"
             component="div"
-            className="text-ellipsis overflow-hidden whitespace-nowrap transition-opacity duration-500"
+            className="text-ellipsis overflow-hidden whitespace-nowrap transition-opacity duration-500 ease-in-out"
           >
             {post.title.length > 25
               ? `${post.title.substring(0, 25)}...`
