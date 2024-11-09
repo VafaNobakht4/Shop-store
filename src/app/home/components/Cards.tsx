@@ -7,6 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import React, { FC } from "react";
+
 type Props = {
   post: Products;
 };
@@ -14,9 +15,9 @@ type Props = {
 const Cards: FC<Props> = ({ post }) => {
   return (
     <div>
-      <Card className="w-96 h-[445px] shadow-lg mt-4" title="vafa">
+      <Card className="shadow-lg mt-4" title="vafa">
         <CardMedia
-          className="object-cover h-80"
+          className="h-48 sm:h-64 md:h-80 lg:h-96"
           image={post.image}
           title="green iguana"
         />
