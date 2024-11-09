@@ -13,12 +13,14 @@ const Home = () => {
 
   useEffect(() => {
     async function initPosts(): Promise<any> {
-      setPosts(await fetchData(PRODUCTS_API));
+      const res = await fetchData(PRODUCTS_API);
+      //@ts-ignore
+      setPosts(res.products);
     }
     initPosts();
   }, []);
 
-  const filteredPosts = posts.filter((post) =>
+  const filteredPosts = posts?.filter((post) =>
     post.title.toLowerCase().includes(search.toLowerCase())
   );
 

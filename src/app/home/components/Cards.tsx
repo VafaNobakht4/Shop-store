@@ -18,7 +18,7 @@ const Cards: FC<Props> = ({ post }) => {
       <Card className="shadow-lg mt-4" title="vafa">
         <CardMedia
           className="h-48 sm:h-64 md:h-80 lg:h-96"
-          image={post.image}
+          image={post.images[0]}
           title="green iguana"
         />
         <CardContent>
