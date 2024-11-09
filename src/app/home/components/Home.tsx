@@ -3,8 +3,8 @@ import { fetchData } from "@/api/useApi";
 import { Products } from "@/types/product";
 import React, { useEffect, useState } from "react";
 import Cards from "./Cards";
-import Loading from "./Loading";
 import Search from "./Search";
+import { PRODUCTS_API } from "@/api/routes";
 
 const Home = () => {
   const [posts, setPosts] = useState<Products[]>([]);
@@ -12,7 +12,7 @@ const Home = () => {
 
   useEffect(() => {
     async function initPosts(): Promise<any> {
-      setPosts(await fetchData("https://fakestoreapi.com/products"));
+      setPosts(await fetchData(PRODUCTS_API));
     }
     initPosts();
   }, []);
@@ -20,22 +20,22 @@ const Home = () => {
   return (
     <>
       <Search setSearch={setSearch} />
-      {posts.length ? (
-        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-10 gap-x-20">
-          {posts.map((post) => {
-            if (post.title.includes(search))
-              return (
-                <div className="col-span-1">
-                  <Cards post={post} />
-                </div>
-              );
-          })}
-        </div>
-      ) : (
+      {/* {posts.length ? ( */}
+      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-10 gap-x-20">
+        {posts.map((post) => {
+          if (post.title.includes(search))
+            return (
+              <div className="col-span-1">
+                <Cards post={post} />
+              </div>
+            );
+        })}
+      </div>
+      {/* ) : (
         <div className="m-auto justify-center flex flex-row items-center">
           <Loading />
         </div>
-      )}
+      )} */}
     </>
   );
 };
