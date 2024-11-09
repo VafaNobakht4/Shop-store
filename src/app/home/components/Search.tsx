@@ -8,7 +8,7 @@ type Props = {
 
 const SearchBox: FC<Props> = ({ setSearch }) => {
   return (
-    <div className="flex justify-center mt-8">
+    <div className="flex justify-center mt-8 mb-4">
       <div className="relative w-full max-w-md">
         <Input
           placeholder="Search"

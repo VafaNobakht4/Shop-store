@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import Cards from "./Cards";
 import SearchBox from "./Search";
 import { PRODUCTS_API } from "@/api/routes";
+import NoProductsFound from "@/components/NoProductFound";
 
 const Home = () => {
   const [posts, setPosts] = useState<Products[]>([]);
@@ -17,19 +18,24 @@ const Home = () => {
     initPosts();
   }, []);
 
+  const filteredPosts = posts.filter((post) =>
+    post.title.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
     <>
       <SearchBox setSearch={setSearch} />
-      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-10 gap-x-20">
-        {posts.map((post) => {
-          if (post.title.includes(search))
-            return (
-              <div className="col-span-1">
-                <Cards post={post} />
-              </div>
-            );
-        })}
-      </div>
+      {filteredPosts.length === 0 ? (
+        <NoProductsFound />
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-10 gap-x-20">
+          {filteredPosts.map((post) => (
+            <div key={post.id} className="col-span-1">
+              <Cards post={post} />
+            </div>
+          ))}
+        </div>
+      )}
     </>
   );
 };
