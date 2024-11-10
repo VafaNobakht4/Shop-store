@@ -16,17 +16,14 @@ const NoProductsFound = () => {
           No Products Found
         </Typography>
         <Typography variant="body1" className="text-gray-500">
-          Sorry, we couldn't find any products that match your search. Please
-          try again with a different search term.
+          Sorry, we couldnt find any products that match your search. Please try
+          again with a different search term.
         </Typography>
         <Button
           variant="contained"
           color="primary"
           size="large"
           className="w-full sm:w-auto"
-          onClick={() => {
-            // Handle the search or reset functionality
-          }}
         >
           Clear Search
         </Button>
