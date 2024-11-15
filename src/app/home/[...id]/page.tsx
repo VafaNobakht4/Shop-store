@@ -1,8 +1,16 @@
 import React from "react";
-import ProductDescription from "./components/ProductDescription";
+import dynamic from "next/dynamic";
+import Loading from "../components/Loading";
 
-const page = ({ params }: { params: { id: string } }) => {
-  return <ProductDescription id={params.id} />;
+const ProductDescription = dynamic(
+  () => import("@/app/home/[...id]/components/ProductDescription"),
+  {
+    ssr: false,
+    loading: () => <Loading />,
+  }
+);
+const page = () => {
+  return <ProductDescription />;
 };
 
 export default page;
