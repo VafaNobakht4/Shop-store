@@ -6,16 +6,19 @@ import Cards from "./Cards";
 import SearchBox from "./Search";
 import { PRODUCTS_API } from "@/api/routes";
 import NoProductsFound from "@/components/NoProductFound";
+import Loading from "./Loading";
 
 const Home = () => {
   const [posts, setPosts] = useState<Products[]>([]);
   const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function initPosts(): Promise<any> {
+      setLoading(true);
       const res = await fetchData(PRODUCTS_API);
-      //@ts-ignore
       setPosts(res.products);
+      setLoading(false);
     }
     initPosts();
   }, []);
@@ -27,16 +30,22 @@ const Home = () => {
   return (
     <>
       <SearchBox setSearch={setSearch} />
-      {filteredPosts.length === 0 ? (
-        <NoProductsFound />
+      {loading ? (
+        <Loading />
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-10 gap-x-20 gap-y-4">
-          {filteredPosts.map((post) => (
-            <div key={post.id} className="col-span-1">
-              <Cards post={post} />
+        <>
+          {filteredPosts.length === 0 ? (
+            <NoProductsFound />
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-10 gap-x-20 gap-y-4">
+              {filteredPosts.map((post) => (
+                <div key={post.id} className="col-span-1">
+                  <Cards post={post} />
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          )}
+        </>
       )}
     </>
   );

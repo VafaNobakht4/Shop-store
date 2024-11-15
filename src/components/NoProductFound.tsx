@@ -20,10 +20,9 @@ const NoProductsFound = () => {
           again with a different search term.
         </Typography>
         <Button
-          variant="contained"
           color="primary"
           size="large"
-          className="w-full sm:w-auto"
+          className="w-full sm:w-auto bg-blue-500 text-white"
         >
           Clear Search
         </Button>
