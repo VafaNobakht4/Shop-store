@@ -37,7 +37,7 @@ const Home = () => {
           {filteredPosts.length === 0 ? (
             <NoProductsFound />
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-10 gap-x-20 gap-y-4">
+            <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-10 gap-x-20 gap-y-4 mb-10">
               {filteredPosts.map((post) => (
                 <div key={post.id} className="col-span-1">
                   <Cards post={post} />
