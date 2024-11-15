@@ -1,4 +1,6 @@
+"use client";
 import { Products } from "@/types/product";
+import { usePost } from "@/zustand/store";
 import {
   Card,
   CardActions,
@@ -7,6 +9,7 @@ import {
   Typography,
   Tooltip,
 } from "@mui/material";
+import { useRouter } from "next/navigation";
 import React, { FC, useState } from "react";
 
 type Props = {
@@ -15,9 +18,10 @@ type Props = {
 
 const Cards: FC<Props> = ({ post }) => {
   const [hovered, setHovered] = useState(false);
-
+  const { push } = useRouter();
   const handleMouseEnter = () => setHovered(true);
   const handleMouseLeave = () => setHovered(false);
+  const savePost = usePost((state) => state.savePost);
 
   return (
     <Card
@@ -27,6 +31,10 @@ const Cards: FC<Props> = ({ post }) => {
       title={post.title}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onClick={() => {
+        push(`/home/${post.id}`);
+        savePost(post);
+      }}
     >
       <CardMedia
         component="img"
