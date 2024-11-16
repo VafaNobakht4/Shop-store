@@ -17,23 +17,48 @@ const Home = () => {
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
   const { push } = useRouter();
+
   useEffect(() => {
-    async function initPosts(): Promise<any> {
+    const initPosts = async () => {
       setLoading(true);
-      const res = await fetchData(PRODUCTS_API);
-      setPosts(res.products);
-      setLoading(false);
-    }
+      try {
+        const res = await fetchData(PRODUCTS_API);
+        setPosts(res.products);
+      } catch (error) {
+        console.error("Failed to fetch products", error);
+      } finally {
+        setLoading(false);
+      }
+    };
     initPosts();
   }, []);
 
-  const filteredPosts = posts?.filter((post) =>
+  const filteredPosts = posts.filter((post) =>
     post.title.toLowerCase().includes(search.toLowerCase())
   );
 
+  const renderContent = () => {
+    if (loading) {
+      return <Loading />;
+    }
+    if (filteredPosts.length === 0) {
+      return <NoProductsFound setSearch={setSearch} />;
+    }
+
+    return (
+      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-10 gap-x-20 gap-y-4 mb-10">
+        {filteredPosts.map((post) => (
+          <div key={post.id} className="col-span-1">
+            <Cards post={post} />
+          </div>
+        ))}
+      </div>
+    );
+  };
+
   return (
     <>
-      <div className="grid grid-cols-3">
+      <header className="grid grid-cols-3">
         <Image
           src={logo}
           alt="logo"
@@ -41,24 +66,8 @@ const Home = () => {
           onClick={() => push(HOME)}
         />
         <SearchBox setSearch={setSearch} search={search} />
-      </div>
-      {loading ? (
-        <Loading />
-      ) : (
-        <>
-          {filteredPosts.length === 0 ? (
-            <NoProductsFound setSearch={setSearch} />
-          ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-10 gap-x-20 gap-y-4 mb-10">
-              {filteredPosts.map((post) => (
-                <div key={post.id} className="col-span-1">
-                  <Cards post={post} />
-                </div>
-              ))}
-            </div>
-          )}
-        </>
-      )}
+      </header>
+      {renderContent()}
     </>
   );
 };
