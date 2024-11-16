@@ -10,10 +10,10 @@ type Props = {
 const SearchBox: FC<Props> = ({ search, setSearch }) => {
   return (
     <div className="flex justify-center mt-8 mb-4">
-      <div className="relative w-full max-w-md">
+      <div className="relative w-full sm:max-w-md max-w-lg mx-9">
         <Input
           placeholder="Search"
-          className="w-full py-3 px-4 rounded-lg border-2 border-gray-300 focus:border-blue-500 transition-all"
+          className="w-full sm:w-64 md:w-full py-3 px-4 rounded-lg border-2 !border-gray-300 focus:border-blue-500 transition-all"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           startAdornment={
