@@ -1,9 +1,9 @@
 "use client";
+import { HOME } from "@/app/setting/routes";
 import { Products } from "@/types/product";
 import { usePost } from "@/zustand/store";
 import {
   Card,
-  CardActions,
   CardContent,
   CardMedia,
   Typography,
@@ -32,7 +32,7 @@ const Cards: FC<Props> = ({ post }) => {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={() => {
-        push(`/home/${post.id}`);
+        push(`${HOME}${post.id}`);
         savePost(post);
       }}
     >
@@ -64,7 +64,6 @@ const Cards: FC<Props> = ({ post }) => {
           <span className="text-base opacity-50">{`${post.price}$`}</span>
         </Typography>
       </CardContent>
-      <CardActions>{/* Actions can be added here if needed */}</CardActions>
     </Card>
   );
 };

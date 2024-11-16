@@ -3,6 +3,7 @@ import { usePost } from "@/zustand/store";
 import React, { FC, useEffect } from "react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useRouter } from "next/navigation";
+import { HOME } from "@/app/setting/routes";
 
 const ProductDescription: FC = () => {
   const post = usePost((state) => state.post);
@@ -20,7 +21,7 @@ const ProductDescription: FC = () => {
     <>
       <ArrowBackIcon
         className="!text-black !text-4xl mr-2 cursor-pointer !ml-10 mt-4"
-        onClick={() => push("/home")}
+        onClick={() => push(HOME)}
       />
       <div className="flex flex-col lg:flex-row justify-evenly items-center min-h-screen overflow-hidden">
         {imageUrl ? (

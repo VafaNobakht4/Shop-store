@@ -1,8 +1,9 @@
 "use client";
 import Image from "next/image";
-import notFound from "@/assets/images/404.svg";
+import notFound from "@/assets/images/not-found.svg";
 import { useRouter } from "next/navigation";
 import { Button } from "@mui/material";
+import { HOME } from "./setting/routes";
 
 const NotFoundPage = () => {
   const { push } = useRouter();
@@ -22,7 +23,7 @@ const NotFoundPage = () => {
             <Button
               size="large"
               className="!w-44 !text-base !hover:text-white !hover:cursor-pointer !bg-blue-500 !text-white mt-1"
-              onClick={() => push("/home")}
+              onClick={() => push(HOME)}
             >
               Go Back Home
             </Button>

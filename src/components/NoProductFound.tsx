@@ -1,9 +1,13 @@
-import React from "react";
+import React, { FC } from "react";
 import { Button, Typography } from "@mui/material";
-import NoProduct from "@/assets/images/Search something on file.png";
+import NoProduct from "@/assets/images/no-data.svg";
 import Image from "next/image";
 
-const NoProductsFound = () => {
+type Props = {
+  setSearch: (search: string) => void;
+};
+
+const NoProductsFound: FC<Props> = ({ setSearch }) => {
   return (
     <div className="flex items-center justify-center min-h-screen p-4">
       <div className="text-center space-y-6 max-w-md w-full">
@@ -22,7 +26,8 @@ const NoProductsFound = () => {
         <Button
           color="primary"
           size="large"
-          className="w-full sm:w-auto bg-blue-500 text-white"
+          className="w-full sm:w-auto !bg-blue-500 !text-white"
+          onClick={() => setSearch("")}
         >
           Clear Search
         </Button>
