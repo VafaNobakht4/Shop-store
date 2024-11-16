@@ -7,12 +7,15 @@ import SearchBox from "./Search";
 import { PRODUCTS_API } from "@/api/routes";
 import NoProductsFound from "@/components/NoProductFound";
 import Loading from "./Loading";
+import Image from "next/image";
+import logo from "@/assets/images/logo.png";
+import { useRouter } from "next/navigation";
 
 const Home = () => {
   const [posts, setPosts] = useState<Products[]>([]);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
-
+  const { push } = useRouter();
   useEffect(() => {
     async function initPosts(): Promise<any> {
       setLoading(true);
@@ -29,7 +32,15 @@ const Home = () => {
 
   return (
     <>
-      <SearchBox setSearch={setSearch} />
+      <div className="grid grid-cols-3">
+        <Image
+          src={logo}
+          alt="logo"
+          className="w-20 h-20 rounded-full ml-8 mt-4 hover:cursor-pointer"
+          onClick={() => push("/home")}
+        />
+        <SearchBox setSearch={setSearch} />
+      </div>
       {loading ? (
         <Loading />
       ) : (
