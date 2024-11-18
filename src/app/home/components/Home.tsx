@@ -12,6 +12,7 @@ import logo from "@/assets/images/logo.png";
 import { useRouter } from "next/navigation";
 import { HOME } from "@/app/setting/routes";
 import { Button } from "@mui/material";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 const Home = () => {
   const [posts, setPosts] = useState<Products[]>([]);
@@ -89,15 +90,22 @@ const Home = () => {
 
   return (
     <>
-      <header className="grid sm:grid-cols-3 grid-cols-1">
+      <header className="grid grid-cols-3 items-center px-4">
         <Image
           src={logo}
           alt="logo"
-          className="!w-20 !h-20 rounded-full ml-8 mr-6 mt-4 hover:cursor-pointer"
+          className="!w-20 !h-20 rounded-full hover:cursor-pointer ml-6"
           onClick={() => push(HOME)}
         />
         <SearchBox setSearch={setSearch} search={search} />
+        <div className="flex justify-end mr-7">
+          <ShoppingCartIcon
+            className="hover:cursor-pointer !text-4xl mt-2"
+            onClick={() => push("/shopping-cart")}
+          />
+        </div>
       </header>
+
       {renderContent()}
     </>
   );
