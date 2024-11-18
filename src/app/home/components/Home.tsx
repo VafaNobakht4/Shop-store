@@ -10,7 +10,7 @@ import Loading from "./Loading";
 import Image from "next/image";
 import logo from "@/assets/images/logo.png";
 import { useRouter } from "next/navigation";
-import { HOME } from "@/app/setting/routes";
+import { HOME, SHOPPING_CART } from "@/app/setting/routes";
 import { Button } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
@@ -101,7 +101,7 @@ const Home = () => {
         <div className="flex justify-end mr-7">
           <ShoppingCartIcon
             className="hover:cursor-pointer !text-4xl mt-2"
-            onClick={() => push("/shopping-cart")}
+            onClick={() => push(SHOPPING_CART)}
           />
         </div>
       </header>
