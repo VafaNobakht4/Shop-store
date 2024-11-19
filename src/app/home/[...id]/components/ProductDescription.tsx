@@ -29,7 +29,7 @@ const ProductDescription: FC = () => {
             <img
               src={imageUrl}
               alt="Product image"
-              className="w-[800px] h-[800px]"
+              className="w-[802px] h-[802px]"
             />
             <div className="flex flex-col mx-10">
               <span className="text-3xl font-bold mb-8">{post.title}</span>
