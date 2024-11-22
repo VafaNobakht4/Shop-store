@@ -4,8 +4,11 @@ import { persist } from "zustand/middleware";
 
 // Define the interface for the PostState
 interface PostState {
-  post?: Products;
-  savePost: (newPost: Products) => void;
+  post?: Products; // Single product
+  shoppingCartPosts: Products[]; // Array of products with quantities
+  savePost: (newPost: Products) => void; // Save a single post
+  addPostToShoppingCart: (newPost: Products) => void; // Add or increment product quantity
+  removePostFromShoppingCart: (product: Products) => void; // Decrement or remove product quantity
 }
 
 // Wrap the `localStorage` with an adapter to match Zustand's expected storage type
@@ -22,11 +25,57 @@ const localStorageAdapter = {
   },
 };
 
-// Create the store with Zustand's persist middleware using the adapter
 export const usePost = create<PostState>()(
   persist(
-    (set) => ({
-      savePost: (newPost: Products) => set({ post: newPost }),
+    (set, get) => ({
+      post: undefined, // Initialize post as undefined
+      shoppingCartPosts: [], // Initialize shoppingCartPosts as an empty array
+      savePost: (newPost: Products) => set({ post: newPost }), // Save single post
+      addPostToShoppingCart: (newPost: Products) => {
+        const currentCart = get().shoppingCartPosts;
+        const existingProduct = currentCart.find(
+          (item) => item.id === newPost.id
+        );
+
+        if (existingProduct) {
+          set({
+            shoppingCartPosts: currentCart.map((item) =>
+              item.id === newPost.id
+                ? { ...item, quantity: (item.quantity || 0) + 1 }
+                : item
+            ),
+          });
+        } else {
+          set({
+            shoppingCartPosts: [
+              ...currentCart,
+              { ...newPost, quantity: 1 }, // Add with initial quantity
+            ],
+          });
+        }
+      },
+      removePostFromShoppingCart: (product: Products) => {
+        const currentCart = get().shoppingCartPosts;
+        const existingProduct = currentCart.find(
+          (item) => item.id === product.id
+        );
+
+        if (existingProduct && existingProduct.quantity > 1) {
+          set({
+            shoppingCartPosts: currentCart.map((item) =>
+              item.id === product.id
+                ? { ...item, quantity: item.quantity - 1 }
+                : item
+            ),
+          });
+        } else {
+          set({
+            shoppingCartPosts: currentCart.filter(
+              (item) => item.id !== product.id
+            ),
+          });
+        }
+      },
     }),
     {
       name: "post-storage", // Name of the storage key

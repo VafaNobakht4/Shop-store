@@ -1,7 +1,21 @@
+import dynamic from "next/dynamic";
 import React from "react";
+import Loading from "../home/components/Loading";
+
+const ShoppingCart = dynamic(
+  () => import("@/app/shopping-cart/components/ShoppingCart"),
+  {
+    ssr: false,
+    loading: () => <Loading />,
+  }
+);
 
 const page = () => {
-  return <div>Hi this is shopping cart</div>;
+  return (
+    <div className="bg-gray-50">
+      <ShoppingCart />{" "}
+    </div>
+  );
 };
 
 export default page;

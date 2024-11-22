@@ -1,4 +1,5 @@
 "use client";
+
 import { HOME } from "@/app/setting/routes";
 import { Products } from "@/types/product";
 import { usePost } from "@/zustand/store";
@@ -8,7 +9,9 @@ import {
   CardMedia,
   Typography,
   Tooltip,
+  IconButton,
 } from "@mui/material";
+import { AddCircle, RemoveCircle } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
 import React, { FC, useState } from "react";
 
@@ -21,7 +24,15 @@ const Cards: FC<Props> = ({ post }) => {
   const { push } = useRouter();
   const handleMouseEnter = () => setHovered(true);
   const handleMouseLeave = () => setHovered(false);
-  const savePost = usePost((state) => state.savePost);
+
+  const addToCart = usePost((state) => state.addPostToShoppingCart);
+  const removeFromCart = usePost((state) => state.removePostFromShoppingCart);
+  const shoppingCartPosts = usePost((state) => state.shoppingCartPosts);
+
+  // Find the quantity of this product in the shopping cart
+  const productQuantity =
+    shoppingCartPosts.find((item) => item.id === post.id)?.quantity || 0;
+  console.log(shoppingCartPosts);
 
   return (
     <Card
@@ -31,10 +42,6 @@ const Cards: FC<Props> = ({ post }) => {
       title={post.title}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      onClick={() => {
-        push(`${HOME}${post.id}`);
-        savePost(post);
-      }}
     >
       <CardMedia
         component="img"
@@ -58,11 +65,33 @@ const Cards: FC<Props> = ({ post }) => {
         <Typography
           variant="body2"
           color="text.secondary"
-          className="flex gap-x-3"
+          className="flex gap-x-3 items-center"
         >
           <span className="font-semibold text-lg">Price:</span>
           <span className="text-base opacity-50">{`${post.price}$`}</span>
+          {/* Display the quantity */}
+          <span className="text-base opacity-50 ml-4">
+            Quantity: {productQuantity}
+          </span>
         </Typography>
+
+        {/* Add and Remove Buttons */}
+        <div className="flex justify-between items-center mt-4">
+          <IconButton
+            aria-label="Add to cart"
+            color="primary"
+            onClick={() => addToCart(post)}
+          >
+            <AddCircle />
+          </IconButton>
+          <IconButton
+            aria-label="Remove from cart"
+            color="secondary"
+            onClick={() => removeFromCart(post)}
+          >
+            <RemoveCircle />
+          </IconButton>
+        </div>
       </CardContent>
     </Card>
   );

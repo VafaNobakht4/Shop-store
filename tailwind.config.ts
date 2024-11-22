@@ -13,6 +13,12 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      height: {
+        "2/3": "66.666667%", // Two-thirds height
+      },
+      minHeight: {
+        "2/3": "66.666667%",
+      },
     },
   },
   plugins: [],
