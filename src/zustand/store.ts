@@ -2,16 +2,14 @@ import { Products } from "@/types/product";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-// Define the interface for the PostState
 interface PostState {
-  post?: Products; // Single product
-  shoppingCartPosts: Products[]; // Array of products with quantities
-  savePost: (newPost: Products) => void; // Save a single post
-  addPostToShoppingCart: (newPost: Products) => void; // Add or increment product quantity
-  removePostFromShoppingCart: (product: Products) => void; // Decrement or remove product quantity
+  post?: Products;
+  shoppingCartPosts: Products[];
+  savePost: (newPost: Products) => void;
+  addPostToShoppingCart: (newPost: Products) => void;
+  removePostFromShoppingCart: (product: Products) => void;
 }
 
-// Wrap the `localStorage` with an adapter to match Zustand's expected storage type
 const localStorageAdapter = {
   getItem: (name: string) => {
     const item = localStorage.getItem(name);
@@ -28,15 +26,14 @@ const localStorageAdapter = {
 export const usePost = create<PostState>()(
   persist(
     (set, get) => ({
-      post: undefined, // Initialize post as undefined
-      shoppingCartPosts: [], // Initialize shoppingCartPosts as an empty array
-      savePost: (newPost: Products) => set({ post: newPost }), // Save single post
+      post: undefined,
+      shoppingCartPosts: [],
+      savePost: (newPost: Products) => set({ post: newPost }),
       addPostToShoppingCart: (newPost: Products) => {
         const currentCart = get().shoppingCartPosts;
         const existingProduct = currentCart.find(
           (item) => item.id === newPost.id
         );
-
         if (existingProduct) {
           set({
             shoppingCartPosts: currentCart.map((item) =>
@@ -47,10 +44,7 @@ export const usePost = create<PostState>()(
           });
         } else {
           set({
-            shoppingCartPosts: [
-              ...currentCart,
-              { ...newPost, quantity: 1 }, // Add with initial quantity
-            ],
+            shoppingCartPosts: [...currentCart, { ...newPost, quantity: 1 }],
           });
         }
       },
@@ -78,8 +72,8 @@ export const usePost = create<PostState>()(
       },
     }),
     {
-      name: "post-storage", // Name of the storage key
-      storage: localStorageAdapter, // Use the custom localStorage adapter
+      name: "storage",
+      storage: localStorageAdapter,
     }
   )
 );

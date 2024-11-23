@@ -1,6 +1,4 @@
 "use client";
-
-import { HOME } from "@/app/setting/routes";
 import { Products } from "@/types/product";
 import { usePost } from "@/zustand/store";
 import {
@@ -62,35 +60,30 @@ const Cards: FC<Props> = ({ post }) => {
               : post.title}
           </Typography>
         </Tooltip>
-        <Typography
-          variant="body2"
-          color="text.secondary"
-          className="flex gap-x-3 items-center"
-        >
-          <span className="font-semibold text-lg">Price:</span>
-          <span className="text-base opacity-50">{`${post.price}$`}</span>
-          {/* Display the quantity */}
-          <span className="text-base opacity-50 ml-4">
-            Quantity: {productQuantity}
-          </span>
-        </Typography>
-
-        {/* Add and Remove Buttons */}
-        <div className="flex justify-between items-center mt-4">
-          <IconButton
-            aria-label="Add to cart"
-            color="primary"
-            onClick={() => addToCart(post)}
-          >
-            <AddCircle />
-          </IconButton>
-          <IconButton
-            aria-label="Remove from cart"
-            color="secondary"
-            onClick={() => removeFromCart(post)}
-          >
-            <RemoveCircle />
-          </IconButton>
+        <div className="flex flex-row justify-between">
+          <div className="mt-1.5">
+            <span className="font-semibold text-lg">Price:</span>
+            <span className="text-base opacity-1">{`${post.price}$`}</span>
+          </div>
+          <div className="flex flex-row">
+            <IconButton
+              aria-label="Add to cart"
+              color="primary"
+              onClick={() => addToCart(post)}
+            >
+              <AddCircle />
+            </IconButton>
+            <span className="text-base opacity-50 mx-1 mt-2">
+              Quantity: {productQuantity}
+            </span>{" "}
+            <IconButton
+              aria-label="Remove from cart"
+              color="secondary"
+              onClick={() => removeFromCart(post)}
+            >
+              <RemoveCircle />
+            </IconButton>
+          </div>
         </div>
       </CardContent>
     </Card>
