@@ -4,7 +4,7 @@ import NoProduct from "@/assets/images/no-data.svg";
 import Image from "next/image";
 
 type Props = {
-  setSearch: (search: string) => void;
+  setSearch?: (search: string) => void;
 };
 
 const NoProductsFound: FC<Props> = ({ setSearch }) => {
@@ -27,7 +27,7 @@ const NoProductsFound: FC<Props> = ({ setSearch }) => {
           color="primary"
           size="large"
           className="w-full sm:w-auto !bg-blue-500 !text-white"
-          onClick={() => setSearch("")}
+          onClick={() => setSearch?.("")}
         >
           Clear Search
         </Button>
