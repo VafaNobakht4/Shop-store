@@ -11,6 +11,8 @@ import {
 } from "@mui/material";
 import { AddCircle, RemoveCircle } from "@mui/icons-material";
 import React, { FC, useState } from "react";
+import { useRouter } from "next/navigation";
+import { HOME } from "@/app/setting/routes";
 
 type Props = {
   post: Products;
@@ -18,11 +20,13 @@ type Props = {
 
 const Cards: FC<Props> = ({ post }) => {
   const [hovered, setHovered] = useState(false);
+  const { push } = useRouter();
   const handleMouseEnter = () => setHovered(true);
   const handleMouseLeave = () => setHovered(false);
   const addToCart = usePost((state) => state.addPostToShoppingCart);
   const removeFromCart = usePost((state) => state.removePostFromShoppingCart);
   const shoppingCartPosts = usePost((state) => state.shoppingCartPosts);
+  const savePost = usePost((state) => state.savePost);
   const productQuantity =
     shoppingCartPosts.find((item) => item.id === post.id)?.quantity || 0;
 
@@ -40,6 +44,10 @@ const Cards: FC<Props> = ({ post }) => {
         className="h-48 sm:h-64 md:h-80 lg:h-96 object-cover"
         image={post.images[0]}
         alt={post.title}
+        onClick={() => {
+          push(`${HOME}${post.id}`);
+          savePost(post);
+        }}
       />
       <CardContent>
         <Tooltip title={post.title} arrow>
