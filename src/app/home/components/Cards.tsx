@@ -20,15 +20,11 @@ const Cards: FC<Props> = ({ post }) => {
   const [hovered, setHovered] = useState(false);
   const handleMouseEnter = () => setHovered(true);
   const handleMouseLeave = () => setHovered(false);
-
   const addToCart = usePost((state) => state.addPostToShoppingCart);
   const removeFromCart = usePost((state) => state.removePostFromShoppingCart);
   const shoppingCartPosts = usePost((state) => state.shoppingCartPosts);
-
-  // Find the quantity of this product in the shopping cart
   const productQuantity =
     shoppingCartPosts.find((item) => item.id === post.id)?.quantity || 0;
-  console.log(shoppingCartPosts);
 
   return (
     <Card

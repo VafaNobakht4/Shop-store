@@ -13,7 +13,7 @@ const ShoppingCart = () => {
   const addToCart = usePost((state) => state.addPostToShoppingCart);
   const removeFromCart = usePost((state) => state.removePostFromShoppingCart);
   return (
-    <div className="flex justify-center items-center h-screen">
+    <div className="flex justify-center items-center h-screen overflow-y-auto">
       <div className="w-3/5 min-h-full sm:min-h-2/3 bg-white rounded-lg">
         <div className="p-14 flex flex-row justify-between">
           <h1 className="font-semibold text-2xl">Shopping Cart</h1>
@@ -26,10 +26,12 @@ const ShoppingCart = () => {
               <div className="w-full h-auto sm:h-48">
                 <div className="flex flex-col m-auto sm:m-0 sm:flex-row justify-between">
                   <div>
-                    <h1 className="ml-14 mt-6">{post.title}</h1>
+                    <h1 className="ml-14 mt-6 text-lg font-bold">
+                      {post.title}
+                    </h1>
                     <div className="mt-6 ml-14">
-                      <span className="font-semibold text-lg">Price:</span>
-                      <span className="text-base opacity-1">{`${post.price}$`}</span>
+                      <span className="font-normal text-lg">Price:</span>
+                      <span className="text-base opacity-60">{` ${post.price}$`}</span>
                     </div>
                     <div className="flex flex-row ml-11 mt-4">
                       <IconButton
@@ -40,7 +42,7 @@ const ShoppingCart = () => {
                       >
                         <RemoveCircle />
                       </IconButton>
-                      <span className="text-base opacity-50 mx-1 mt-2">
+                      <span className="text-base opacity-60 mx-1 mt-2">
                         Quantity: {post.quantity}
                       </span>
                       <IconButton
@@ -56,7 +58,7 @@ const ShoppingCart = () => {
                     <img
                       src={post?.images?.[0]}
                       alt={post.title}
-                      className="p-4 w-48 h-44"
+                      className="p-4 w-52 object-cover h-44"
                     />
                   </div>
                 </div>
