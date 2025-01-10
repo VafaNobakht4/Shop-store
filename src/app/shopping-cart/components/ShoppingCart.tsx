@@ -1,40 +1,93 @@
+// ShoppingCart.tsx
 "use client";
+import React from "react";
 import NavMenu from "@/components/header/NavMenu";
 import { calculateTotalNumberItems } from "@/utils/calculateToalNumberItems";
 import { usePost } from "@/zustand/store";
-import { AddCircle, RemoveCircle } from "@mui/icons-material";
+import {
+  AddCircle,
+  RemoveCircle,
+  ShoppingCart as ShoppingCartIcon,
+} from "@mui/icons-material";
 import { IconButton } from "@mui/material";
-import React from "react";
+import { HOME } from "@/app/setting/routes";
 
 const ShoppingCart = () => {
   const shoppingCartPosts = usePost((state) => state.shoppingCartPosts);
-  const itemsNumebr = calculateTotalNumberItems(shoppingCartPosts);
+  const itemsNumber = calculateTotalNumberItems(shoppingCartPosts);
   const addToCart = usePost((state) => state.addPostToShoppingCart);
   const removeFromCart = usePost((state) => state.removePostFromShoppingCart);
+  const savePost = usePost((state) => state.savePost);
+
   return (
     <>
       <NavMenu isShowLogo />
-      <div className="flex justify-center items-center h-screen overflow-y-auto">
-        <div className="w-3/5 min-h-full sm:min-h-2/3 bg-white rounded-lg">
-          <div className="p-14 flex flex-row justify-between">
-            <h1 className="font-semibold text-2xl">Shopping Cart</h1>
-            <h1 className="mt-0.5 text-lg">{`items: ${itemsNumebr}`}</h1>
+      <section className="py-8 px-4 sm:px-6 lg:px-8 bg-gray-100 min-h-screen">
+        <div className="container mx-auto">
+          {/* Cart Header */}
+          <div className="flex flex-col sm:flex-row justify-between items-center mb-6">
+            <h1 className="text-3xl font-bold flex items-center">
+              <ShoppingCartIcon className="mr-2" />
+              Shopping Cart
+            </h1>
+            <h2 className="mt-4 sm:mt-0 text-xl font-medium text-gray-700">
+              {`Items: ${itemsNumber}`}
+            </h2>
           </div>
-          <hr />
+          <hr className="mb-6" />
+
+          {/* Cart Items */}
           {shoppingCartPosts.length > 0 ? (
-            shoppingCartPosts.map((post) => (
-              <>
-                <div className="w-full h-auto sm:h-48">
-                  <div className="flex flex-col m-auto sm:m-0 sm:flex-row justify-between">
+            <div className="space-y-6">
+              {shoppingCartPosts.map((post) => (
+                <div
+                  key={post.id}
+                  className="flex flex-col sm:flex-row bg-white rounded-lg shadow-md overflow-hidden"
+                >
+                  <div className="sm:w-1/3 px-20 py-3 mx-auto">
+                    <img
+                      src={post.images[0]}
+                      alt={post.title}
+                      className="w-44 sm:h-56 object-cover"
+                      onClick={() => {
+                        savePost(post);
+                        // Assuming push navigates to product details
+                        window.location.href = `${HOME}${post.id}`;
+                      }}
+                      style={{ cursor: "pointer" }}
+                    />
+                  </div>
+
+                  {/* Product Details */}
+                  <div className="sm:w-2/3 p-4 sm:p-6 flex flex-col justify-between">
                     <div>
-                      <h1 className="ml-14 mt-6 text-lg font-bold">
+                      <h2 className="text-2xl font-semibold text-gray-800 mb-2">
                         {post.title}
-                      </h1>
-                      <div className="mt-6 ml-14">
-                        <span className="font-normal text-lg">Price:</span>
-                        <span className="text-base opacity-60">{` ${post.price}$`}</span>
+                      </h2>
+                      <p className="text-gray-600 mb-4">
+                        {post.description.length > 100
+                          ? `${post.description.substring(0, 100)}...`
+                          : post.description}
+                      </p>
+                      {/* Category Badge */}
+                      <div className="inline-block bg-pink-200 text-pink-800 text-sm px-3 py-1 rounded-full">
+                        {post.category.charAt(0).toUpperCase() +
+                          post.category.slice(1)}
                       </div>
-                      <div className="flex flex-row ml-11 mt-4">
+                    </div>
+
+                    {/* Price and Quantity Controls */}
+                    <div className="flex flex-col sm:flex-row justify-between items-center mt-4">
+                      {/* Price */}
+                      <div className="mb-4 sm:mb-0">
+                        <span className="text-lg font-semibold text-gray-800">
+                          Price:{" "}
+                        </span>
+                        <span className="text-lg text-gray-700">{`${post.price}$`}</span>
+                      </div>
+
+                      {/* Quantity Controls */}
+                      <div className="flex items-center">
                         <IconButton
                           aria-label="Remove from cart"
                           color="error"
@@ -43,8 +96,8 @@ const ShoppingCart = () => {
                         >
                           <RemoveCircle />
                         </IconButton>
-                        <span className="text-base opacity-60 mx-1 mt-2">
-                          Quantity: {post.quantity}
+                        <span className="mx-2 text-lg text-gray-700">
+                          {post.quantity}
                         </span>
                         <IconButton
                           aria-label="Add to cart"
@@ -55,25 +108,24 @@ const ShoppingCart = () => {
                         </IconButton>
                       </div>
                     </div>
-                    <div>
-                      <img
-                        src={post?.images?.[0]}
-                        alt={post.title}
-                        className="p-4 w-52 object-cover h-44"
-                      />
-                    </div>
                   </div>
                 </div>
-                <hr />
-              </>
-            ))
+              ))}
+            </div>
           ) : (
-            <div className="flex flex-row items-center justify-center pt-6 mt-4">
-              Shopping cart is empty
+            /* Empty Cart Message */
+            <div className="flex flex-col items-center justify-center py-20 bg-white rounded-lg shadow-md">
+              <ShoppingCartIcon className="text-6xl text-gray-400 mb-4" />
+              <h2 className="text-2xl font-semibold text-gray-700 mb-2">
+                Your Shopping Cart is Empty
+              </h2>
+              <p className="text-gray-500">
+                Looks like you haven't added anything to your cart yet.
+              </p>
             </div>
           )}
         </div>
-      </div>
+      </section>
     </>
   );
 };
