@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
 import React from "react";
-import Loading from "../home/components/Loading";
+import Loading from "../../components/public/loading/Loading";
 
 const ShoppingCart = dynamic(
   () => import("@/app/shopping-cart/components/ShoppingCart"),

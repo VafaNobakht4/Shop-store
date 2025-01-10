@@ -1,16 +1,13 @@
-import React from "react";
-import dynamic from "next/dynamic";
-import Loading from "../components/Loading";
+import Loading from "@/components/public/loading/Loading";
+import React, { Suspense } from "react";
+import ProductDetail from "../../../components/private/product-detail/ProductDetail";
 
-const ProductDescription = dynamic(
-  () => import("@/app/home/[...id]/components/ProductDescription"),
-  {
-    ssr: false,
-    loading: () => <Loading />,
-  }
-);
 const page = () => {
-  return <ProductDescription />;
+  return (
+    <Suspense fallback={<Loading />}>
+      <ProductDetail />
+    </Suspense>
+  );
 };
 
 export default page;

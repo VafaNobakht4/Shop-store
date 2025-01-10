@@ -1,7 +1,7 @@
 // Cards.tsx
 "use client";
 import { Products } from "@/types/product";
-import { usePost } from "@/zustand/store";
+import { usePost } from "@/shared/zustand/store";
 import {
   Card,
   CardContent,

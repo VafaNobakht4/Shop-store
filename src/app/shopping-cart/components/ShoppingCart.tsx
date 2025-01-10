@@ -1,9 +1,9 @@
 // ShoppingCart.tsx
 "use client";
 import React from "react";
-import NavMenu from "@/components/header/NavMenu";
-import { calculateTotalNumberItems } from "@/utils/calculateToalNumberItems";
-import { usePost } from "@/zustand/store";
+import NavMenu from "@/components/private/header/NavMenu";
+import { calculateTotalNumberItems } from "@/shared/utils/calculateToalNumberItems";
+import { usePost } from "@/shared/zustand/store";
 import {
   AddCircle,
   RemoveCircle,

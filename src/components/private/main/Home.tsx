@@ -5,11 +5,11 @@ import { Products } from "@/types/product";
 import React, { useEffect, useState } from "react";
 import Cards from "./Cards";
 import { PRODUCTS_API } from "@/api/routes";
-import NoProductsFound from "@/components/NoProductFound";
-import Loading from "./Loading";
-import NavMenu from "@/components/header/NavMenu";
-import usePagination from "../hooks/usePagination";
-import Pagination from "./Pagination";
+import NoProductsFound from "@/components/public/not-found-product/NoProductFound";
+import Loading from "../../public/loading/Loading";
+import NavMenu from "@/components/private/header/NavMenu";
+import Pagination from "../../public/pagination/Pagination";
+import usePagination from "@/shared/hooks/usePagination";
 
 const Home = () => {
   const [posts, setPosts] = useState<Products[]>([]);

@@ -1,14 +1,13 @@
-import React from "react";
-import dynamic from "next/dynamic";
-import Loading from "./components/Loading";
-
-const Home = dynamic(() => import("@/app/home/components/Home"), {
-  ssr: false,
-  loading: () => <Loading />,
-});
+import React, { Suspense } from "react";
+import Loading from "../../components/public/loading/Loading";
+import Home from "@/components/private/main/Home";
 
 const page = () => {
-  return <Home />;
+  return (
+    <Suspense fallback={<Loading />}>
+      <Home />
+    </Suspense>
+  );
 };
 
 export default page;

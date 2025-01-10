@@ -1,11 +1,11 @@
 "use client";
-import { usePost } from "@/zustand/store";
+import { usePost } from "@/shared/zustand/store";
 import React, { FC, useEffect } from "react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useRouter } from "next/navigation";
 import { HOME } from "@/app/setting/routes";
 
-const ProductDescription: FC = () => {
+const ProductDetail: FC = () => {
   const post = usePost((state) => state.post);
   const { push } = useRouter();
   const imageUrl = post?.images?.[0];
@@ -57,4 +57,4 @@ const ProductDescription: FC = () => {
   );
 };
 
-export default ProductDescription;
+export default ProductDetail;
