@@ -3,11 +3,11 @@ import { HOME, SHOPPING_CART } from "@/app/setting/routes";
 import { useRouter } from "next/navigation";
 import React, { FC } from "react";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import SearchBox from "@/components/search/Search";
 import logo from "@/assets/images/logo.png";
 import Image from "next/image";
 import { usePost } from "@/shared/zustand/store";
 import { calculateTotalNumberItems } from "@/shared/utils/calculateToalNumberItems";
+import SearchBox from "@/components/public/search/Search";
 
 type Props = {
   search?: string;
