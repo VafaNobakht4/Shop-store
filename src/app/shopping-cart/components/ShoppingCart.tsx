@@ -43,13 +43,10 @@ const ShoppingCart = () => {
                   className="flex flex-col sm:flex-row bg-white rounded-lg shadow-md overflow-hidden"
                 >
                   <div className="sm:w-1/3 px-20 py-3 mx-auto">
-                    <Image
+                    <img
                       src={post.images[0]}
                       alt={post.title}
-                      width={176}
-                      height={224}
                       className="rounded-t-lg sm:rounded-l-lg sm:rounded-t-none"
-                      priority={false}
                     />
                   </div>
                   <div className="sm:w-2/3 p-4 sm:p-6 flex flex-col justify-between">
