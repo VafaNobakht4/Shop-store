@@ -11,6 +11,7 @@ import {
 } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 import { HOME } from "@/app/setting/routes";
+import Image from "next/image";
 
 const ShoppingCart = () => {
   const shoppingCartPosts = usePost((state) => state.shoppingCartPosts);
@@ -42,16 +43,13 @@ const ShoppingCart = () => {
                   className="flex flex-col sm:flex-row bg-white rounded-lg shadow-md overflow-hidden"
                 >
                   <div className="sm:w-1/3 px-20 py-3 mx-auto">
-                    <img
+                    <Image
                       src={post.images[0]}
                       alt={post.title}
-                      className="w-44 sm:h-56 object-cover"
-                      onClick={() => {
-                        savePost(post);
-                        // Assuming push navigates to product details
-                        window.location.href = `${HOME}${post.id}`;
-                      }}
-                      style={{ cursor: "pointer" }}
+                      width={176}
+                      height={224}
+                      className="rounded-t-lg sm:rounded-l-lg sm:rounded-t-none"
+                      priority={false}
                     />
                   </div>
                   <div className="sm:w-2/3 p-4 sm:p-6 flex flex-col justify-between">
@@ -108,7 +106,7 @@ const ShoppingCart = () => {
                 Your Shopping Cart is Empty
               </h2>
               <p className="text-gray-500">
-                Looks like you haven't added anything to your cart yet.
+                Looks like you havent added anything to your cart yet.
               </p>
             </div>
           )}
