@@ -46,7 +46,7 @@ const ShoppingCart = () => {
                     <img
                       src={post.images[0]}
                       alt={post.title}
-                      className="rounded-t-lg sm:rounded-l-lg sm:rounded-t-none"
+                      className="w-44 sm:h-56 object-cover"
                     />
                   </div>
                   <div className="sm:w-2/3 p-4 sm:p-6 flex flex-col justify-between">
