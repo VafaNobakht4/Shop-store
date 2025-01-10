@@ -10,8 +10,6 @@ import {
   ShoppingCart as ShoppingCartIcon,
 } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
-import { HOME } from "@/app/setting/routes";
-import Image from "next/image";
 
 const ShoppingCart = () => {
   const shoppingCartPosts = usePost((state) => state.shoppingCartPosts);
