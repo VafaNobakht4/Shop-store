@@ -63,7 +63,6 @@ const Cards: FC<Props> = ({ post }) => {
               : post.title}
           </Typography>
         </Tooltip>
-        {/* Product Description */}
         <Typography
           variant="body2"
           color="text.secondary"
@@ -73,7 +72,6 @@ const Cards: FC<Props> = ({ post }) => {
             ? `${post.description.substring(0, 60)}...`
             : post.description}
         </Typography>
-        {/* Category Badge */}
         <div className="h-8 px-3 bg-pink-200 mt-2 flex justify-center items-center rounded-full self-start">
           <Typography
             variant="subtitle2"
@@ -82,16 +80,13 @@ const Cards: FC<Props> = ({ post }) => {
             {post.category.charAt(0).toUpperCase() + post.category.slice(1)}
           </Typography>
         </div>
-        {/* Price and Quantity Controls */}
         <div className="flex flex-col sm:flex-row justify-between items-center mt-4">
-          {/* Price */}
           <div className="mb-2 sm:mb-0">
             <Typography variant="subtitle1" className="font-semibold text-lg">
               Price:{" "}
               <span className="text-base text-gray-800">{`${post.price}$`}</span>
             </Typography>
           </div>
-          {/* Quantity Controls */}
           <div className="flex flex-row items-center">
             <IconButton
               aria-label="Remove from cart"

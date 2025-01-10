@@ -24,7 +24,6 @@ const ShoppingCart = () => {
       <NavMenu isShowLogo />
       <section className="py-8 px-4 sm:px-6 lg:px-8 bg-gray-100 min-h-screen">
         <div className="container mx-auto">
-          {/* Cart Header */}
           <div className="flex flex-col sm:flex-row justify-between items-center mb-6">
             <h1 className="text-3xl font-bold flex items-center">
               <ShoppingCartIcon className="mr-2" />
@@ -35,8 +34,6 @@ const ShoppingCart = () => {
             </h2>
           </div>
           <hr className="mb-6" />
-
-          {/* Cart Items */}
           {shoppingCartPosts.length > 0 ? (
             <div className="space-y-6">
               {shoppingCartPosts.map((post) => (
@@ -57,8 +54,6 @@ const ShoppingCart = () => {
                       style={{ cursor: "pointer" }}
                     />
                   </div>
-
-                  {/* Product Details */}
                   <div className="sm:w-2/3 p-4 sm:p-6 flex flex-col justify-between">
                     <div>
                       <h2 className="text-2xl font-semibold text-gray-800 mb-2">
@@ -69,24 +64,18 @@ const ShoppingCart = () => {
                           ? `${post.description.substring(0, 100)}...`
                           : post.description}
                       </p>
-                      {/* Category Badge */}
                       <div className="inline-block bg-pink-200 text-pink-800 text-sm px-3 py-1 rounded-full">
                         {post.category.charAt(0).toUpperCase() +
                           post.category.slice(1)}
                       </div>
                     </div>
-
-                    {/* Price and Quantity Controls */}
                     <div className="flex flex-col sm:flex-row justify-between items-center mt-4">
-                      {/* Price */}
                       <div className="mb-4 sm:mb-0">
                         <span className="text-lg font-semibold text-gray-800">
                           Price:{" "}
                         </span>
                         <span className="text-lg text-gray-700">{`${post.price}$`}</span>
                       </div>
-
-                      {/* Quantity Controls */}
                       <div className="flex items-center">
                         <IconButton
                           aria-label="Remove from cart"
@@ -113,7 +102,6 @@ const ShoppingCart = () => {
               ))}
             </div>
           ) : (
-            /* Empty Cart Message */
             <div className="flex flex-col items-center justify-center py-20 bg-white rounded-lg shadow-md">
               <ShoppingCartIcon className="text-6xl text-gray-400 mb-4" />
               <h2 className="text-2xl font-semibold text-gray-700 mb-2">
