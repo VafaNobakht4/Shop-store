@@ -20,7 +20,7 @@ const ShoppingCart = () => {
   return (
     <>
       <NavMenu isShowLogo />
-      <section className="py-8 px-4 sm:px-6 lg:px-8 bg-gray-100 min-h-screen">
+      <section className="py-8 px-4 sm:px-6 lg:px-8 min-h-screen">
         <div className="container mx-auto">
           <div className="flex flex-col sm:flex-row justify-between items-center mb-6">
             <h1 className="text-3xl font-bold flex items-center">
