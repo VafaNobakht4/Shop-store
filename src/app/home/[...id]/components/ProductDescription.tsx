@@ -20,7 +20,7 @@ const ProductDescription: FC = () => {
   return (
     <>
       <ArrowBackIcon
-        className="text-black text-4xl mr-2 cursor-pointer !ml-10 mt-4"
+        className="text-black text-4xl mr-2 cursor-pointer lg:ml-10 ml-2 sm:ml-3 mt-4"
         onClick={() => push(HOME)}
       />
       <div className="flex flex-col md:flex-row justify-evenly items-center h-screen overflow-scroll">
