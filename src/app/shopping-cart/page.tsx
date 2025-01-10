@@ -1,19 +1,13 @@
-import dynamic from "next/dynamic";
-import React from "react";
+import React, { Suspense } from "react";
 import Loading from "../../components/public/loading/Loading";
-
-const ShoppingCart = dynamic(
-  () => import("@/app/shopping-cart/components/ShoppingCart"),
-  {
-    ssr: false,
-    loading: () => <Loading />,
-  }
-);
+import ShoppingCart from "./components/ShoppingCart";
 
 const page = () => {
   return (
     <div className="bg-gray-50">
-      <ShoppingCart />{" "}
+      <Suspense fallback={<Loading />}>
+        <ShoppingCart />
+      </Suspense>
     </div>
   );
 };
