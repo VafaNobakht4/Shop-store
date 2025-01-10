@@ -16,7 +16,6 @@ const ShoppingCart = () => {
   const itemsNumber = calculateTotalNumberItems(shoppingCartPosts);
   const addToCart = usePost((state) => state.addPostToShoppingCart);
   const removeFromCart = usePost((state) => state.removePostFromShoppingCart);
-  const savePost = usePost((state) => state.savePost);
 
   return (
     <>
