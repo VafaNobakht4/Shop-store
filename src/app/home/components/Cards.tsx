@@ -1,3 +1,4 @@
+// Cards.tsx
 "use client";
 import { Products } from "@/types/product";
 import { usePost } from "@/zustand/store";
@@ -32,16 +33,16 @@ const Cards: FC<Props> = ({ post }) => {
 
   return (
     <Card
-      className={`mt-4 transition-all duration-500 transform ${
-        hovered ? "scale-105 shadow-2xl" : "shadow-lg"
-      } hover:cursor-pointer hover:scale-105 hover:shadow-2xl`}
+      className={`mt-4 transition-transform duration-300 transform ${
+        hovered ? "scale-105 shadow-xl" : "shadow-md"
+      } hover:cursor-pointer w-full`}
       title={post.title}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
       <CardMedia
         component="img"
-        className="h-48 sm:h-64 md:h-80 lg:h-96 object-cover"
+        className="w-full h-48 sm:h-56 md:h-64 lg:h-72 object-cover"
         image={post.images[0]}
         alt={post.title}
         onClick={() => {
@@ -49,41 +50,67 @@ const Cards: FC<Props> = ({ post }) => {
           savePost(post);
         }}
       />
-      <CardContent>
+      <CardContent className="flex flex-col p-4 sm:p-5">
         <Tooltip title={post.title} arrow>
           <Typography
             gutterBottom
-            variant="h5"
+            variant="h6"
             component="div"
-            className="text-ellipsis overflow-hidden whitespace-nowrap transition-opacity duration-500 ease-in-out"
+            className="text-ellipsis overflow-hidden whitespace-nowrap text-lg font-semibold"
           >
             {post.title.length > 25
               ? `${post.title.substring(0, 25)}...`
               : post.title}
           </Typography>
         </Tooltip>
-        <div className="flex flex-row justify-between">
-          <div className="mt-1.5">
-            <span className="font-semibold text-lg">Price:</span>
-            <span className="text-base opacity-1">{`${post.price}$`}</span>
+        {/* Product Description */}
+        <Typography
+          variant="body2"
+          color="text.secondary"
+          className="mb-4 text-sm text-gray-700"
+        >
+          {post.description.length > 60
+            ? `${post.description.substring(0, 60)}...`
+            : post.description}
+        </Typography>
+        {/* Category Badge */}
+        <div className="h-8 px-3 bg-pink-200 mt-2 flex justify-center items-center rounded-full self-start">
+          <Typography
+            variant="subtitle2"
+            className="text-black text-sm font-medium"
+          >
+            {post.category.charAt(0).toUpperCase() + post.category.slice(1)}
+          </Typography>
+        </div>
+        {/* Price and Quantity Controls */}
+        <div className="flex flex-col sm:flex-row justify-between items-center mt-4">
+          {/* Price */}
+          <div className="mb-2 sm:mb-0">
+            <Typography variant="subtitle1" className="font-semibold text-lg">
+              Price:{" "}
+              <span className="text-base text-gray-800">{`${post.price}$`}</span>
+            </Typography>
           </div>
-          <div className="flex flex-row">
+          {/* Quantity Controls */}
+          <div className="flex flex-row items-center">
             <IconButton
               aria-label="Remove from cart"
               color="error"
               onClick={() => removeFromCart(post)}
+              size="small"
             >
-              <RemoveCircle />
+              <RemoveCircle fontSize="small" />
             </IconButton>
-            <span className="text-base opacity-50 mx-1 mt-2">
-              Quantity: {productQuantity}
+            <span className="text-base text-gray-600 mx-1 sm:text-sm">
+              {`Qty: ${productQuantity}`}
             </span>
             <IconButton
               aria-label="Add to cart"
               color="primary"
               onClick={() => addToCart(post)}
+              size="small"
             >
-              <AddCircle />
+              <AddCircle fontSize="small" />
             </IconButton>
           </div>
         </div>

@@ -1,3 +1,4 @@
+// Home.tsx
 "use client";
 import { fetchData } from "@/api/useApi";
 import { Products } from "@/types/product";
@@ -46,20 +47,22 @@ const Home = () => {
       return <NoProductsFound setSearch={setSearch} />;
 
     return (
-      <>
-        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-10 gap-x-20 gap-y-4 mb-10">
-          {currentItems.map((post) => (
-            <div key={post.id} className="col-span-1">
-              <Cards post={post} />
-            </div>
-          ))}
+      <section className="py-8 px-4 sm:px-6 lg:px-8">
+        <div className="container mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            {currentItems.map((post) => (
+              <Cards key={post.id} post={post} />
+            ))}
+          </div>
+          <div className="flex justify-center mt-8">
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              paginate={paginate}
+            />
+          </div>
         </div>
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          paginate={paginate}
-        />
-      </>
+      </section>
     );
   };
 
