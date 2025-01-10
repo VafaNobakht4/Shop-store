@@ -20,30 +20,33 @@ const ProductDescription: FC = () => {
   return (
     <>
       <ArrowBackIcon
-        className="!text-black !text-4xl mr-2 cursor-pointer !ml-10 mt-4"
+        className="text-black text-4xl mr-2 cursor-pointer !ml-10 mt-4"
         onClick={() => push(HOME)}
       />
-      <div className="flex flex-col lg:flex-row justify-evenly items-center min-h-screen overflow-hidden">
+      <div className="flex flex-col md:flex-row justify-evenly items-center h-screen overflow-scroll">
         {imageUrl ? (
-          <div className="border-black border-solid flex flex-col sm:flex-row items-center">
+          <div className=" flex flex-col lg:flex-row items-center p-4 md:p-6 lg:p-8">
             <img
               src={imageUrl}
-              alt="Product image"
-              className="w-[800px] h-[800px]"
+              alt={post.title}
+              className="w-full lg:w-1/2 h-auto object-fit mb-4 lg:mb-0 lg:mr-8"
             />
-            <div className="flex flex-col mx-10">
-              <span className="text-3xl font-bold mb-8">{post.title}</span>
-              <span className="max-w-[1000px] items-center text-lg">
+            <div className="flex flex-col w-full lg:w-1/2">
+              <h2 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6">
+                {post.title}
+              </h2>
+              <p className="text-base sm:text-lg text-gray-700 mb-4 sm:mb-6">
                 {post.description}
-              </span>
-              <div className="h-12 w-48 bg-pink-200 mt-6 flex justify-center items-center">
-                <span className="!text-black text-2xl font-medium">
-                  {post.category.slice(0, 1).toUpperCase() +
-                    post.category.slice(1, post.category.length)}
+              </p>
+              <div className="h-12 w-32 sm:w-48 bg-pink-200 mt-4 sm:mt-6 flex justify-center items-center rounded">
+                <span className="text-black text-xl sm:text-2xl font-medium">
+                  {post.category.charAt(0).toUpperCase() +
+                    post.category.slice(1)}
                 </span>
               </div>
-
-              <span className="font-semibold text-xl my-6">{`${post.price} $`}</span>
+              <span className="font-semibold text-lg sm:text-xl mt-4 mb-10 sm:mt-6">
+                {`${post.price} $`}
+              </span>
             </div>
           </div>
         ) : (
