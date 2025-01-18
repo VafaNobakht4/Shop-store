@@ -189,7 +189,7 @@ export const usePost = create<PostState>()(
     }
   )
 );
-
+```
 ---
 
 ## 📋 Future Enhancements
